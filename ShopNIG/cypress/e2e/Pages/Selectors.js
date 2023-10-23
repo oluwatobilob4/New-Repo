@@ -43,4 +43,12 @@ export class CART{
     cart_btn(){
         cy.get(':nth-child(3) > .header__navbar-link').click()
     }
+
+    Increase_btn(){
+        cy.get('.add__btn').click()
+    }
+
+    Reduce_btn(){
+        cy.get('.subtract__btn').click()
+    }
 }
