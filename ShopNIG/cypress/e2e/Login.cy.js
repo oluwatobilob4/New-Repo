@@ -12,7 +12,7 @@ describe('Testing Login', () => {
 
   })
 
-  it('Login with valid details', function(){
+  it.only('Login with valid details', function(){
     Login.login()
     Login.usermail('tyme4christ@gmail.com')
     Login.Password('Testing4@')

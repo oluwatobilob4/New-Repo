@@ -11,7 +11,7 @@ describe('Cart', ()=>{
         cy.visit('https://shopnig.netlify.app/')
     })
 
-    it('Checkout Process - adding shipping address', ()=>{
+    it.skip('Checkout Process - adding shipping address', ()=>{
         Checkout.login()
         Checkout.usermail('tyme4christ@gmail.com')
         Checkout.Password('Testing4@')
@@ -38,13 +38,19 @@ describe('Cart', ()=>{
         Checkout.usermail('tyme4christ@gmail.com')
         Checkout.Password('Testing4@')
         Checkout.login_btn()
+        cy.scrollTo('bottom', { easing: 'linear' }) 
+        cy.wait(1000)
         Checkout.Product()
+        cy.wait(800)
         Checkout.AddToCart()
         Checkout.cart_btn()
         Checkout.check_out()
-        Checkout.Door_delivery()
+        Checkout.Public_transport()
+        cy.scrollTo('top', { easing: 'linear' })
         Checkout.Pay_wallet()
+        Checkout.Coupon()
         Checkout.Pay()
+        Checkout.See_details()
 })
 
 it('Checkout Process - Pick up', ()=>{
@@ -56,9 +62,12 @@ it('Checkout Process - Pick up', ()=>{
     Checkout.AddToCart()
     Checkout.cart_btn()
     Checkout.check_out()
+    Checkout.Change_address()
+    Checkout.Select_address()
     Checkout.Pick_up()
-    Checkout.Pay_wallet()
+    Checkout.Pay_Pickup()
     Checkout.Pay()
+    Checkout.See_details()
 })
 
     

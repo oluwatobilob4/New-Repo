@@ -1,0 +1,44 @@
+/// <reference types = 'Cypress'/>
+
+import { ORDERS } from "./Pages/Selectors";
+
+const Order = new ORDERS
+
+describe("Orders", ()=>{
+    beforeEach(()=>{
+        cy.visit('https://shopnig.netlify.app/')
+    })
+
+    it("Navigating to Orders", ()=>{
+        Order.login()
+        Order.usermail('tyme4christ@gmail.com')
+        Order.Password('Testing4@')
+        Order.login_btn()
+        cy.wait(1000)
+        Order.Account_Icon()
+    })
+
+    it("Verify user can view order details", ()=>{
+        Order.login()
+        Order.usermail('tyme4christ@gmail.com')
+        Order.Password('Testing4@')
+        Order.login_btn()
+        cy.wait(1000)
+        Order.Account_Icon('Orders')
+        Order.Orders()
+        cy.scrollTo('bottom', { easing: 'linear' }) 
+        cy.wait(3000)
+        cy.scrollTo('top', { easing: 'linear' }) 
+    })
+
+    it.only("Verify user can sort and filter orders", ()=>{
+        Order.login()
+        Order.usermail('tyme4christ@gmail.com')
+        Order.Password('Testing4@')
+        Order.login_btn()
+        cy.wait(1000)
+        Order.Account_Icon('Orders')
+        Order.Order_filter()
+    })
+
+})
