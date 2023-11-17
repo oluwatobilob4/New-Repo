@@ -8,23 +8,26 @@ const Checkout = new CHECKOUT
 describe('Cart', ()=>{
 
     beforeEach(()=>{
-        cy.visit('https://shopnig.netlify.app/')
-    })
-
-    it.skip('Checkout Process - adding shipping address', ()=>{
+        cy.visit('/')
         Checkout.login()
         Checkout.usermail('tyme4christ@gmail.com')
         Checkout.Password('Testing4@')
         Checkout.login_btn()
+
+        cy.location('pathname').should('eq', '/')
+    })
+
+    it.skip('Checkout Process - adding shipping address', ()=>{
+        cy.visit('/')
         Checkout.Product()
         Checkout.AddToCart()
         Checkout.cart_btn()
         Checkout.check_out()
         Checkout.Add_address()
-        Checkout.First_nameField('Benjamin')
-        Checkout.Second_nameField('Phillip')
-        Checkout.Shipping_address('new bodija')
-        Checkout.Type_Of_Address('Office')
+        Checkout.First_nameField('Paul')
+        Checkout.Second_nameField('Phillips')
+        Checkout.Shipping_address('old bodija')
+        Checkout.Type_Of_Address('Home')
         Checkout.State('Lagos')
         Checkout.Local_Gvt("Ikeja")
         Checkout.City('Egbeda')
@@ -34,10 +37,7 @@ describe('Cart', ()=>{
     })
 
     it('Checkout Process - Door delivery', ()=>{
-        Checkout.login()
-        Checkout.usermail('tyme4christ@gmail.com')
-        Checkout.Password('Testing4@')
-        Checkout.login_btn()
+        cy.visit('/')
         cy.scrollTo('bottom', { easing: 'linear' }) 
         cy.wait(1000)
         Checkout.Product()
@@ -48,18 +48,16 @@ describe('Cart', ()=>{
         Checkout.Public_transport()
         cy.scrollTo('top', { easing: 'linear' })
         Checkout.Pay_wallet()
-        Checkout.Coupon()
+        Checkout.Coupon('Mercy')
         Checkout.Pay()
         Checkout.See_details()
 })
 
 it('Checkout Process - Pick up', ()=>{
-    Checkout.login()
-    Checkout.usermail('tyme4christ@gmail.com')
-    Checkout.Password('Testing4@')
-    Checkout.login_btn()
+    cy.visit('/')
     Checkout.Product()
     Checkout.AddToCart()
+    Checkout.Popular()
     Checkout.cart_btn()
     Checkout.check_out()
     Checkout.Change_address()

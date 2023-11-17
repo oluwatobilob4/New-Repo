@@ -6,23 +6,28 @@ const Order = new ORDERS
 
 describe("Orders", ()=>{
     beforeEach(()=>{
-        cy.visit('https://shopnig.netlify.app/')
+
+        cy.session('login', ()=>{
+            cy.visit('/')
+            Order.login()
+            Order.usermail('tyme4christ@gmail.com')
+            Order.Password('Testing4@')
+            Order.login_btn()
+
+        cy.location('pathname').should('eq', '/')
+
+        })
+       
     })
 
     it("Navigating to Orders", ()=>{
-        Order.login()
-        Order.usermail('tyme4christ@gmail.com')
-        Order.Password('Testing4@')
-        Order.login_btn()
+        cy.visit('/')
         cy.wait(1000)
-        Order.Account_Icon()
+        Order.Account_Icon('Orders')
     })
 
     it("Verify user can view order details", ()=>{
-        Order.login()
-        Order.usermail('tyme4christ@gmail.com')
-        Order.Password('Testing4@')
-        Order.login_btn()
+        cy.visit('/')
         cy.wait(1000)
         Order.Account_Icon('Orders')
         Order.Orders()
@@ -31,11 +36,8 @@ describe("Orders", ()=>{
         cy.scrollTo('top', { easing: 'linear' }) 
     })
 
-    it.only("Verify user can sort and filter orders", ()=>{
-        Order.login()
-        Order.usermail('tyme4christ@gmail.com')
-        Order.Password('Testing4@')
-        Order.login_btn()
+    it("Verify user can sort and filter orders", ()=>{
+        cy.visit('/')
         cy.wait(1000)
         Order.Account_Icon('Orders')
         Order.Order_filter()

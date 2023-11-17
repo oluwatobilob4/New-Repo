@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("login", (usermail, password) => {
+    cy.session({usermail, password}, () =>{
+        cy.visit('https://shopnig.netlify.app/')
+        cy.get('.header__right > [href="/login"]').click();
+        cy.get('.form-input').type(usermail);
+        cy.get('.input-group > input').type(password);
+        cy.get('.enabled').click()
+
+    })
+    
+
+});
